@@ -25,8 +25,7 @@ class OpenWebPage {
     // YOUR CODE HERE
     URL url = new URL("https://www." + inputLine + ".com");
     BufferedReader br = new BufferedReader(new InputStreamReader(url.openStream()));
-    String lines = getPageLines(br);
-    System.out.println(getFiveLines(lines));
+    printLines(getPageLines(br));
   }
   
   /**
@@ -36,37 +35,26 @@ class OpenWebPage {
    * @return a String containing all the lines from web-page. 
    * @throws IOException 
    */
-  public static String getPageLines(BufferedReader br) throws IOException { 
-      String allLines = "";
-      boolean check = false;
+  public static String[] getPageLines(BufferedReader br) throws IOException { 
+      String[] allLines = new String[5];
       
-      do {
+      for (int i = 0; i < 5; ++i) {
         String line = br.readLine();
-        if (line != null) 
-            allLines += line + "\n";
-        else 
-            check = true;
-      } while (!check);    
+        if (line != null) allLines[i] = line + "\n";          
+      }
       
       return allLines;
   }
-  
+    
   /**
-   * Return the first 5 lines from the web-page
+   * Print the first five lines of web-page in reverse order
    * 
-   * @param s, all the lines from the web-page
-   * @return a string containing the first 5 lines of web-page
+   * @param strArr, the String array containing the five lines
    */
-  public static String getFiveLines(String s) {
-    String outPut = "";  
-    String[] strArr = s.split("\n");
-    
-    // change this to get 5 lines, won't be a for-each loop
-    for (String i : strArr) {
-        if (i.contains("</p>") || i.contains("</li>"))
-            outPut += i + "\n";
+  public static void printLines(String[] strArr) {
+      for (int i = 4; i >= 0; --i) {
+        System.out.println(strArr[i]);
     }
-    
-    return outPut;
   }
+  
 }
