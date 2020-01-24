@@ -20,6 +20,8 @@ public class SetOfInts {
    }
    
    /**
+    *  This is the best option
+    * 
     *  Iterative binary search implementation
     *  Takes around 7-10 seconds to execute , 0(logN) 
     * 
@@ -41,6 +43,8 @@ public class SetOfInts {
    }
    
     /**
+    *  Good option, but may result in Stack Overflow.
+    * 
     *  Recursive binary search implementation
     *  Takes around 7-10 seconds to execute , 0(logN) 
     * 
@@ -60,6 +64,9 @@ public class SetOfInts {
    }
    
     /**
+    *   
+    *  Not a good option
+    * 
     *  Linear search implementation
     *  Takes around 6 minutes to execute , 0(N) 
     * 
