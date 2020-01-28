@@ -5,10 +5,7 @@ import java.util.Arrays;
 import java.util.Collections;
 
 /**
- * Somewhat working...
- * The last three array values are working w/ correct output
- * First one is causing trouble but it's getting better
- * 
+ * All working, just fix formatting
  */
 
 public class ArraySquashExercise {
