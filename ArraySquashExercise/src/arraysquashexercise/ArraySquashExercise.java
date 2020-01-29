@@ -1,12 +1,6 @@
 package arraysquashexercise;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-
-/**
- * All working, just fix formatting
- */
 
 public class ArraySquashExercise {
 
@@ -29,25 +23,32 @@ public class ArraySquashExercise {
   // THIS IS THE METHOD YOU NEED TO IMPLEMENT
   public static void squash(int[] a) {
     // YOUR CODE BELOW (PLEASE BE PREPARED TO EXPLAIN YOUR SOLUTION)
-    newSquash(a);
+    int[] newArr = new int[a.length];
+    for (int i = 0; i < a.length-1; i++) {
+        if (a[i] != a[i+1]) {
+            newArr[i] = a[i];
+            newArr[i+1] = a[i+1];
+        } 
+        else {
+            newArr[i] = -1;
+            newArr[i+1] = a[i];
+        }
+    }
+    for (int x = 0; x < a.length; ++x) a[x] = newArr[x];
+    formatSquash(newArr, a);    
   }
-  
-  public static void newSquash(int[] a) {
-      int[] newArr = new int[a.length];
-      for (int i = 0; i < a.length-1; i++) {
-          if (a[i] != a[i+1]) {
-              newArr[i] = a[i];
-              newArr[i+1] = a[i+1];
-          } 
-          else {
-              newArr[i] = -1;
-              newArr[i+1] = a[i];
-          }
+
+  public static void formatSquash(int[] arr, int[] a) {
+      ArrayList<Integer> idx_list = new ArrayList<>();
+      int[] newArr = new int[arr.length];
+      for (int i = 0; i < arr.length; ++i) 
+          if (arr[i] >= 0) idx_list.add(arr[i]);
+      for (int x = 0; x < arr.length; ++x) {
+          if (x < idx_list.size()) newArr[x] = idx_list.get(x);
+          else newArr[x] = -1;
       }
-      for (int x = 0; x < a.length; ++x) {
-          a[x] = newArr[x];
-      }
-  }
+      for (int z = 0; z < arr.length; ++z) a[z] = newArr[z]; 
+  } 
     
   // DO NOT CHANGE THE stringInts() METHOD (IT'S USED BY TESTS IN main())
   /**
@@ -79,44 +80,40 @@ public class ArraySquashExercise {
     int[] test1 = {3, 7, 7, 7, 4, 5, 5, 2, 0, 8, 8, 8, 8, 5};
     System.out.println("squashing " + stringInts(test1) + ":");
     //squash(test1);
-    newSquash(test1);
+    squash(test1);
     result = stringInts(test1);
     System.out.println(result);
-    System.out.println("Should be: 3  7  4  5  2  0  8  5  -1  -1  -1  -1  -1  -1\n");
-    //TestHelper.verify(result.equals(
-    //        "[  3  7  4  5  2  0  8  5  -1  -1  -1  -1  -1  -1  ]"),
-    //                  "BAD SQUASH!!!  No candy.");
+    TestHelper.verify(result.equals(
+            "[  3  7  4  5  2  0  8  5  -1  -1  -1  -1  -1  -1  ]"),
+                      "BAD SQUASH!!!  No candy.");
 
     int[] test2 = {6, 6, 6, 6, 6, 3, 6, 3, 6, 3, 3, 3, 3, 3, 3};
     System.out.println("squashing " + stringInts(test2) + ":");
     //squash(test2);
-    newSquash(test2);
+    squash(test2);
     result = stringInts(test2);
     System.out.println(result);
-    System.out.println("Should be: 6  3  6  3  6  3  -1  -1  -1  -1  -1  -1  -1  -1  -1\n");
-    //TestHelper.verify(result.equals(
-    //        "[  6  3  6  3  6  3  -1  -1  -1  -1  -1  -1  -1  -1  -1  ]"),
-    //                  "BAD SQUASH!!!  No candy.");
+    TestHelper.verify(result.equals(
+            "[  6  3  6  3  6  3  -1  -1  -1  -1  -1  -1  -1  -1  -1  ]"),
+                      "BAD SQUASH!!!  No candy.");
 
     int[] test3 = {4, 4, 4, 4, 4};
     System.out.println("squashing " + stringInts(test3) + ":");
     //squash(test3);
-    newSquash(test3);
+    squash(test3);
     result = stringInts(test3);
     System.out.println(result);
-    System.out.println("Should be: 4  -1  -1  -1  -1\n");
-    //TestHelper.verify(result.equals("[  4  -1  -1  -1  -1  ]"),
-    //                  "BAD SQUASH!!!  No candy.");
+    TestHelper.verify(result.equals("[  4  -1  -1  -1  -1  ]"),
+                      "BAD SQUASH!!!  No candy.");
 
     int[] test4 = {0, 1, 2, 3, 4, 5, 6};
     System.out.println("squashing " + stringInts(test4) + ":");
     //squash(test4);
-    newSquash(test4);
+    squash(test4);
     result = stringInts(test4);
     System.out.println(result);
-    System.out.println("Should be: 0  1  2  3  4  5  6\n");
-    //TestHelper.verify(result.equals("[  0  1  2  3  4  5  6  ]"),
-    //                  "BAD SQUASH!!!  No candy.");
+    TestHelper.verify(result.equals("[  0  1  2  3  4  5  6  ]"),
+                      "BAD SQUASH!!!  No candy.");
   }
 
 }
