@@ -6,8 +6,7 @@ public class Lab_SevenB {
         MaxPQ.main(args);
         System.out.println();
         MinPQ.main(args);
-        System.out.println();
-        TopMints.main(args);
+        TopMints.runTests();
     }
     
 }
