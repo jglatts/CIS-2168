@@ -66,8 +66,10 @@ public class BetterIndexGenerator {
       Collections.sort(sortedKeys);
 
       // Display the TreeMap sorted by key
-    //  for (String word : sortedKeys)
-    //    System.out.println(word + "  " + wordToListMap.get(word));
+      for (String word : sortedKeys){
+        //System.out.println(word + "  " + wordToListMap.get(word));
+        System.out.printf("%-17s %s\n", word, wordToListMap.get(word));
+      }
    }
 
    public static void main(String[] args) throws FileNotFoundException {
@@ -81,7 +83,7 @@ public class BetterIndexGenerator {
 
       System.out.println();
       index.showWordFrequency();
-
+      System.out.println();
       index.sortByKey();
 
       // determine which lines contain the word "fragment"
