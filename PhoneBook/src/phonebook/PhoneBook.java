@@ -1,5 +1,5 @@
 package phonebook;
-
+    
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -7,17 +7,11 @@ import java.util.*;
 
 public class PhoneBook {
     private FastScanner in = new FastScanner();
-    private Map<Integer, Contact> contactMap = new TreeMap<>();
-    //private Set<Contact> contactSet = new HashSet<>();
+    private Map<Integer, String> contactMap = new TreeMap<>();
     
     public static void main(String[] args) {
-        // start timer
         final long startTime = System.currentTimeMillis();
-
-        // process the queries
         new PhoneBook().processQueries();
-
-        // end the timer and print the result
         final long endTime = System.currentTimeMillis();
         System.out.println("Total execution time: " + (endTime - startTime)/1000F + " seconds.");
     }
@@ -37,19 +31,13 @@ public class PhoneBook {
     private void processQuery(Query query) {
         switch (query.type) {
             case "add":
-                contactMap.put(query.number, new Contact(query.name, query.number));
-                //contactSet.add(new Contact(query.name, query.number));
+                contactMap.put(query.number, query.name);
                 break;
             case "del":
                 contactMap.remove(query.number);
-                //contactSet.remove(query.number);
                 break;
             default:
-                String response = "not found";
-                if (contactMap.containsKey(query.number)) {
-                    response = contactMap.get(query.number).name;
-                }   
-                writeResponse(response);
+                writeResponse(contactMap.getOrDefault(query.number, "not found"));
                 break;
         }
     }
@@ -58,16 +46,6 @@ public class PhoneBook {
         int queryCount = in.nextInt();
         for (int i = 0; i < queryCount; ++i)
             processQuery(readQuery());
-    }
-
-    static class Contact {
-        String name;
-        int number;
-
-        public Contact(String name, int number) {
-            this.name = name;
-            this.number = number;
-        }
     }
 
     static class Query {
