@@ -1,9 +1,3 @@
-/**
- * Time Requirement: 3.5s
- * Time Range (on thinkpad yoga 11e): 3.0 - 6.0s
- * 
- * Tweak and get the time down!!!!
- */
 package phonebook;
     
 import java.io.BufferedReader;
