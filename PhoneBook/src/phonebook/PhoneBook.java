@@ -1,3 +1,9 @@
+/**
+ * Time Requirement: 3.5s
+ * Time Range (on thinkpad yoga 11e): 3.0 - 6.0s
+ * 
+ * Tweak and get the time down!!!!
+ */
 package phonebook;
     
 import java.io.BufferedReader;
@@ -7,7 +13,7 @@ import java.util.*;
 
 public class PhoneBook {
     private FastScanner in = new FastScanner();
-    private Map<Integer, String> contactMap = new TreeMap<>();
+    private Map<Integer, String> contactMap = new HashMap<>();
     
     public static void main(String[] args) {
         final long startTime = System.currentTimeMillis();
