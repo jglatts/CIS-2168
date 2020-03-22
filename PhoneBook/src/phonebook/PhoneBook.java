@@ -10,7 +10,7 @@ public class PhoneBook {
     private Map<Integer, String> contactMap = new HashMap<>();
     private String outString = "";
     
-    /* Driver Method */
+    /* Driver method */
     public static void main(String[] args) {
         final long startTime = System.currentTimeMillis();
         new PhoneBook().processQueries();
@@ -18,7 +18,7 @@ public class PhoneBook {
         System.out.println("Total execution time: " + (endTime - startTime)/1000F + " seconds.");
     }
     
-    /* Read and Return the correct Query, depending on the input */ 
+    /* Read and return the correct Query, depending on the input */ 
     private Query readQuery() {
         String type = in.next();
         int number = in.nextInt();
@@ -29,10 +29,10 @@ public class PhoneBook {
         else return new Query(type, number);
     }
     
-    /* Create the string containing the Contacts, if they exist */
+    /* Create the string containing the contacts, if they exist */
     private void createResponse(String response) { outString += response + "\n"; }
 
-    /* Checks what type of query we have, and acts accordingly */
+    /* Checks what type of Query we have, and acts accordingly */
     private void processQuery(Query query) {
         switch (query.type) {
             case "add":
@@ -47,7 +47,7 @@ public class PhoneBook {
         }
     }
     
-    /* Read the input and process queries */
+    /* Read the input and process Queries */
     public void processQueries() {
         int queryCount = in.nextInt();
         for (int i = 0; i < queryCount; ++i) processQuery(readQuery());
