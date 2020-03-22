@@ -9,6 +9,7 @@ public class PhoneBook {
     private FastScanner in = new FastScanner();
     private Map<Integer, String> contactMap = new HashMap<>();
     private String outString = "";
+    
     public static void main(String[] args) {
         final long startTime = System.currentTimeMillis();
         new PhoneBook().processQueries();
