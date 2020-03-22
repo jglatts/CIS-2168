@@ -1,4 +1,4 @@
-package phonebook;
+package lab_sevenb;
     
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -8,7 +8,7 @@ import java.util.*;
 public class PhoneBook {
     private FastScanner in = new FastScanner();
     private Map<Integer, String> contactMap = new HashMap<>();
-    
+    private String outString = "";
     public static void main(String[] args) {
         final long startTime = System.currentTimeMillis();
         new PhoneBook().processQueries();
@@ -26,7 +26,7 @@ public class PhoneBook {
         else return new Query(type, number);
     }
 
-    private void writeResponse(String response) { System.out.println(response); }
+    private void createResponse(String response) { outString += response + "\n"; }
 
     private void processQuery(Query query) {
         switch (query.type) {
@@ -37,15 +37,16 @@ public class PhoneBook {
                 contactMap.remove(query.number);
                 break;
             default:
-                writeResponse(contactMap.getOrDefault(query.number, "not found"));
+                createResponse(contactMap.getOrDefault(query.number, "not found"));
                 break;
         }
     }
 
     public void processQueries() {
         int queryCount = in.nextInt();
-        for (int i = 0; i < queryCount; ++i)
-            processQuery(readQuery());
+        System.out.println("Processing " + queryCount + " Queries...");
+        for (int i = 0; i < queryCount; ++i) processQuery(readQuery());
+        System.out.println(outString);
     }
 
     static class Query {
