@@ -24,9 +24,10 @@ public class BuildHeap {
 
    // reads the integer array a[]
    private void readData() {
-      In in = new In("5intsReverseSorted.txt");
-      //In in = new In("10Kints.txt");
+      //In in = new In("5intsReverseSorted.txt");
+      In in = new In("10Kints.txt");
       //In in = new In("5ints.txt");
+      //In in = new In("test.txt");
       int n = in.readInt();
       a = new int[n];
       for (int i = 0; i < n; ++i) {
@@ -49,8 +50,11 @@ public class BuildHeap {
    private void generateSwaps() {
       swaps = new ArrayList<Swap>();
       int n = a.length-1;  // the largest index in a[]
-      sink(a, n, n);
-      
+      int startIdx = (n-1) / 2;
+      for (int i = startIdx; i >= 0; i--) { 
+        sink(a, i, n); 
+      }
+
       // The following naive implementation sorts the given
       // sequence and saves the resulting sequence of swaps.
       // This turns the given array into a heap, but uses
@@ -67,28 +71,37 @@ public class BuildHeap {
       }
       */
    }
-
+     
    // sinks element at position k in array a[] of size n
    // keeps a record of swapped elements.
    private void sink(int[] a, int k, int n) {
-       // kind-of working, missing a large chunk of swaps tho
-       // it works for the simple 5ints
-       //System.out.println("Current Min-Heap = " + Arrays.toString(a));
-       if (k < 0) return;
-       int leaf = k;
-       int parent = (k-1)/2;    
-       //System.out.println("Leaf = " + leaf + " Parent = " + parent);
-       if (a[parent] > a[leaf]) {
-           swaps.add(new Swap(parent, leaf));
-           exch(a, leaf, parent);
-           sink(a, parent, n);
-        }    
-        if (a[leaf] < a[parent]) sink(a, leaf-1, n);
-        //sink(a, leaf-1, n);
-   }
+        int smallest = k;  // Initialize smallest as root 
+        int l = 2 * k + 1; // left = 2*i + 1 
+        int r = 2 * k + 2; // right = 2*i + 2 
 
+        // If right child is smaller than smaller so far 
+        if (r <= n && a[r] < a[smallest]) 
+            smallest = r;
+
+
+        // If left child is smaller than root 
+        if (l <= n && a[l] < a[smallest]) 
+            smallest = l; 
+
+
+        // If largest is not root 
+        if (smallest != k) { 
+            exch(a, k, smallest); 
+            swaps.add(new Swap(k, smallest));
+
+            // Recursively heapify the affected sub-tree 
+            sink(a, smallest, n); 
+        } 
+   }
+      
    // helper: exchanges elements at positions i and j in array a[]
    private void exch(int[] a, int i, int j) {
+      if (!(i < a.length && j < a.length)) return;
       int swap = a[i];
       a[i] = a[j];
       a[j] = swap;
