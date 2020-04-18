@@ -9,7 +9,8 @@ import java.util.Random;
 public class Quick3 {
 
    private static Random random = new Random();
-
+   private static int lowerThan, greaterThan;
+   
    // Do not instantiate this class.
    private Quick3() { }
 
@@ -26,12 +27,13 @@ public class Quick3 {
 
       //COMMENT OR DELETE THE NEXT 3 LINES AND USE partition3() INSTEAD
       System.out.print("Shuffled Array: ");show(a);
-      partition3(a, lo, hi);
 
       //YOUR CODE HERE. USE partition3()
-      // int[] m = ...
+      int[] m = partition3(a, lo, hi);
       // recursively sort the region to the left  of the middle region m
       // recursively sort the region to the right of the middle region m
+      partition3(m, lo, lowerThan-1);   // sort left sub-array
+      partition3(m, greaterThan+1, hi); // sort right sub-array
    }
 
    // partition2 the subarray a[lo..hi] so that a[lo..j-1] <= a[j] <= a[j+1..hi]
@@ -68,11 +70,12 @@ public class Quick3 {
    private static int[] partition3(int[] a, int lo, int hi) {
       //YOUR CODE HERE
       if (hi <= lo) return null;
-
-      int i = lo, lowerThan = lo, greaterThan = hi;
+      
+      lowerThan = lo;
+      greaterThan = hi;
+      int i = lo;
       int pivot = a[lo]; 
       while (i <= greaterThan) {
-          // study the print statements and then write out by hand
           System.out.println("\nPivot is: " + pivot + " at index " + lo);
           System.out.print("Array is: ");show(a);
           if (a[i] < pivot) {
@@ -91,10 +94,7 @@ public class Quick3 {
           else 
               ++i; // increase space for same values
       }
-      
-      partition3(a, lo, lowerThan-1);   // sort left sub-array
-      partition3(a, greaterThan+1, hi); // sort right sub-array
-      
+            
       return a;
    }
 
@@ -131,7 +131,6 @@ public class Quick3 {
       for (int i = 0; i < n; i++) {
          a[i] = in.readInt();
       }
-      show(a);
       Quick3.sort(a);
       show(a);
    }
