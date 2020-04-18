@@ -31,8 +31,8 @@ public class Quick3 {
       int[] m = partition3(a, lo, hi);
       // recursively sort the region to the left  of the middle region m
       // recursively sort the region to the right of the middle region m
-      partition3(m, lo, lowerThan-1);   // sort left sub-array
-      partition3(m, greaterThan+1, hi); // sort right sub-array
+      sort(m, lo, lowerThan-1);   // sort left sub-array
+      sort(m, greaterThan+1, hi); // sort right sub-array
    }
 
    // partition2 the subarray a[lo..hi] so that a[lo..j-1] <= a[j] <= a[j+1..hi]
