@@ -1,6 +1,5 @@
 package lab11;
 
-import java.util.Arrays;
 import java.util.Random;
 
 // Class Quick3. Provides static methods for sorting an integer array
@@ -26,7 +25,7 @@ public class Quick3 {
       exch(a, lo, k);
 
       //COMMENT OR DELETE THE NEXT 3 LINES AND USE partition3() INSTEAD
-      System.out.print("Shuffled Array: ");show(a);
+      //System.out.print("Shuffled Array: ");show(a);
 
       //YOUR CODE HERE. USE partition3()
       int[] m = partition3(a, lo, hi);
@@ -67,35 +66,35 @@ public class Quick3 {
    }
 
    // THIS IS  THE METHOD THAT YOU NEED TO USE INSTEAD OF partition2()
-   private static int[] partition3(int[] a, int lo, int hi) {
+   private static int[] partition3(int[] m, int lo, int hi) {
       //YOUR CODE HERE
       if (hi <= lo) return null;
       
       lowerThan = lo;
       greaterThan = hi;
       int i = lo;
-      int pivot = a[lo]; 
+      int pivot = m[lo]; 
       while (i <= greaterThan) {
-          System.out.println("\nPivot is: " + pivot + " at index " + lo);
-          System.out.print("Array is: ");show(a);
-          if (a[i] < pivot) {
-              System.out.println(a[i] + " < " + pivot);
-              System.out.println("Exchanging " + a[lowerThan] + " and " + a[i]);
-              exch(a, lowerThan, i);
+          //System.out.println("\nPivot is: " + pivot + " at index " + lo);
+          //System.out.print("Array is: ");show(m);
+          if (m[i] < pivot) {
+              //System.out.println(m[i] + " < " + pivot);
+              //System.out.println("Exchanging " + m[lowerThan] + " and " + m[i]);
+              exch(m, lowerThan, i);
               lowerThan++;
               i++;
           }
-          else if (a[i] > pivot) {
-              System.out.println(a[i] + " > " + pivot);
-              System.out.println("Exchanging " + a[i] + " and " + a[greaterThan]);
-              exch(a, i, greaterThan);
+          else if (m[i] > pivot) {
+              //System.out.println(m[i] + " > " + pivot);
+              //System.out.println("Exchanging " + m[i] + " and " + m[greaterThan]);
+              exch(m, i, greaterThan);
               greaterThan--;
           }
           else 
               ++i; // increase space for same values
       }
             
-      return a;
+      return m;
    }
 
    /***************************************************************************
@@ -113,7 +112,8 @@ public class Quick3 {
    // print array to standard output
    private static void show(int[] a) {
       for (int i = 0; i < a.length; i++) {
-         System.out.print(a[i] + " ");
+         //System.out.print(a[i] + " ");
+         System.out.println(a[i] + " ");
       }
       System.out.println();
    }
@@ -125,7 +125,8 @@ public class Quick3 {
     */
    public static void main(String[] args) {
       // test quicksort with integers
-      In in = new In("5ints.txt");
+      //In in = new In("5ints.txt");
+      In in = new In("10Kints.txt");
       int n = in.readInt();
       int[] a = new int[n];
       for (int i = 0; i < n; i++) {
