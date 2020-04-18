@@ -78,22 +78,14 @@ public class BuildHeap {
         int smallest = k;  // Initialize smallest as root 
         int l = 2 * k + 1; // left = 2*i + 1 
         int r = 2 * k + 2; // right = 2*i + 2 
-
-        // If right child is smaller than smaller so far 
-        if (r <= n && a[r] < a[smallest]) 
-            smallest = r;
-
-
-        // If left child is smaller than root 
-        if (l <= n && a[l] < a[smallest]) 
-            smallest = l; 
-
-
-        // If largest is not root 
+        // Check if right child is smaller than root 
+        if (r <= n && a[r] < a[smallest]) smallest = r;
+        // Check if left child is smaller than smallest so far 
+        if (l <= n && a[l] < a[smallest]) smallest = l; 
+        // If smallest is not root 
         if (smallest != k) { 
             exch(a, k, smallest); 
             swaps.add(new Swap(k, smallest));
-
             // Recursively heapify the affected sub-tree 
             sink(a, smallest, n); 
         } 
@@ -101,7 +93,6 @@ public class BuildHeap {
       
    // helper: exchanges elements at positions i and j in array a[]
    private void exch(int[] a, int i, int j) {
-      if (!(i < a.length && j < a.length)) return;
       int swap = a[i];
       a[i] = a[j];
       a[j] = swap;
