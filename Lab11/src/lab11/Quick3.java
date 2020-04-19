@@ -23,10 +23,10 @@ public class Quick3 {
       if (hi <= lo) return;
       int k = random.nextInt(hi - lo + 1) + lo;
       exch(a, lo, k);
-
+      //int j = partition2(a, lo, hi);
+      //sort(a, lo, j-1);
+      //sort(a, j+1, hi);
       //COMMENT OR DELETE THE NEXT 3 LINES AND USE partition3() INSTEAD
-      //System.out.print("Shuffled Array: ");show(a);
-
       //YOUR CODE HERE. USE partition3()
       int[] m = partition3(a, lo, hi);
       // recursively sort the region to the left  of the middle region m
@@ -70,26 +70,14 @@ public class Quick3 {
       //YOUR CODE HERE
       if (hi <= lo) return null;
       
-      lowerThan = lo;
-      greaterThan = hi;
-      int i = lo;
-      int pivot = m[lo]; 
+      lowerThan = lo; greaterThan = hi;
+      int pivot = m[lo], i = lo;
+      
       while (i <= greaterThan) {
-          //System.out.println("\nPivot is: " + pivot + " at index " + lo);
-          //System.out.print("Array is: ");show(m);
-          if (m[i] < pivot) {
-              //System.out.println(m[i] + " < " + pivot);
-              //System.out.println("Exchanging " + m[lowerThan] + " and " + m[i]);
-              exch(m, lowerThan, i);
-              lowerThan++;
-              i++;
-          }
-          else if (m[i] > pivot) {
-              //System.out.println(m[i] + " > " + pivot);
-              //System.out.println("Exchanging " + m[i] + " and " + m[greaterThan]);
-              exch(m, i, greaterThan);
-              greaterThan--;
-          }
+          if (m[i] < pivot) 
+              exch(m, lowerThan++, i++);
+          else if (m[i] > pivot) 
+              exch(m, i, greaterThan--);
           else 
               ++i; // increase space for same values
       }

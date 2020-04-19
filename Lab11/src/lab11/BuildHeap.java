@@ -1,7 +1,6 @@
 package lab11;
 
 import java.io.BufferedOutputStream;
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -93,9 +92,11 @@ public class BuildHeap {
         int l = 2 * k + 1; // left = 2*k + 1 
         int r = 2 * k + 2; // right = 2*k + 2 
         // Check if right child is smaller than root 
-        if (r <= n && a[r] < a[smallest]) smallest = r;
+        if (r <= n && a[r] < a[smallest]) 
+            smallest = r;
         // Check if left child is smaller than smallest so far 
-        if (l <= n && a[l] < a[smallest]) smallest = l; 
+        if (l <= n && a[l] < a[smallest]) 
+            smallest = l; 
         // If smallest is not root 
         if (smallest != k) { 
             exch(a, k, smallest); 
