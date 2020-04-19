@@ -1,6 +1,8 @@
 package lab11;
 
 import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -10,24 +12,35 @@ public class BuildHeap {
    private int[] a;          // array to be turned into a heap
    private List<Swap> swaps; // list of swapped elements while building the heap
    private PrintWriter out;  // helps print the answer (swaps) to screen.
-
+   private static In in;            // helper class for input
+   
    public static void main(String[] args) {
-      new BuildHeap().solve();
+       new BuildHeap().solve();
    }
 
+   // Over-loaded main method with a test file as parameter
+   public static void main(String[] args, String s) {
+       in = new In(s);
+       new BuildHeap().solve();
+   }   
+   
    // solves the problem
    public void solve() {
+      long start = System.currentTimeMillis();
       readData();
       generateSwaps();
-      writeResponse();
+      long time = (System.currentTimeMillis() - start)/100;
+      writeResponse(time);
+   }
+   
+   public static void changeInputFile(String s, int n) throws FileNotFoundException {
+       TestFile.makeTestFile(s, n);
+       in = new In(s);
    }
 
    // reads the integer array a[]
    private void readData() {
-      //In in = new In("5intsReverseSorted.txt");
-      In in = new In("10Kints.txt");
-      //In in = new In("5ints.txt");
-      //In in = new In("test.txt");
+      if (in == null) in = new In("10Kints.txt"); 
       int n = in.readInt();
       a = new int[n];
       for (int i = 0; i < n; ++i) {
@@ -36,13 +49,14 @@ public class BuildHeap {
    }
 
    // prints the answer
-   private void writeResponse() {
+   private void writeResponse(long time) {
       out = new PrintWriter(new BufferedOutputStream(System.out));
       //out.println("Current Min-Heap = " + Arrays.toString(a)) ;
       out.println(swaps.size());
       for (Swap swap : swaps) {
          out.println(swap.index1 + " " + swap.index2);
       }
+      out.println("\nHeapified In: " + time + " seconds");
       out.close();
    }
 
@@ -76,8 +90,8 @@ public class BuildHeap {
    // keeps a record of swapped elements.
    private void sink(int[] a, int k, int n) {
         int smallest = k;  // Initialize smallest as root 
-        int l = 2 * k + 1; // left = 2*i + 1 
-        int r = 2 * k + 2; // right = 2*i + 2 
+        int l = 2 * k + 1; // left = 2*k + 1 
+        int r = 2 * k + 2; // right = 2*k + 2 
         // Check if right child is smaller than root 
         if (r <= n && a[r] < a[smallest]) smallest = r;
         // Check if left child is smaller than smallest so far 
@@ -86,7 +100,6 @@ public class BuildHeap {
         if (smallest != k) { 
             exch(a, k, smallest); 
             swaps.add(new Swap(k, smallest));
-            // Recursively heapify the affected sub-tree 
             sink(a, smallest, n); 
         } 
    }
