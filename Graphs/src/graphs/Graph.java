@@ -106,11 +106,17 @@ public class Graph {
     // Adds the undirected edge v-w to this graph.
     public void addEdge(int v, int w) {
         E++;
-        // ex: 1 -> 2
-        //     2 -> 1
-        // that's why there two entries
+        if (isCycle(v, w)) return;    
         adj[v].add(w);
         adj[w].add(v);
+    }
+    
+    private boolean isCycle(int v, int w) {
+        if (v == w) {
+           adj[v].add(w);
+           return true;           
+        }
+        return false;
     }
 
     // Returns the vertices adjacent to vertex v.
@@ -124,12 +130,17 @@ public class Graph {
     @Override
     public String toString() {
         StringBuilder s = new StringBuilder();
+        boolean cyclecheck = false;
         s.append(V + " vertices, " + E + " edges \n");
         for (int v = 0; v < V; v++) {
             s.append(v + ": ");
             for (int w : adj[v]) {
+                if (v == w) cyclecheck = true;
                 s.append(w + " ");
             }
+            // figure out why 69 is being printed twice
+            if (cyclecheck) s.append("---Cycle Here!!---");
+            cyclecheck = false;
             s.append("\n");
         }
         return s.toString();
@@ -137,7 +148,7 @@ public class Graph {
 
     // Tests the Graph data type.
     public static void main(String[] args) {
-        Graph G = new Graph(new In("tinyG.txt"));
+        Graph G = new Graph(new In("mediumG.txt"));
         System.out.println(G);
     }
 
