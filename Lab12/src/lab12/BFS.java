@@ -1,3 +1,5 @@
+package lab12;
+
 import java.util.*;
 
 public class BFS {
@@ -8,26 +10,34 @@ public class BFS {
         for (int i = 0; i < distTo.length; i++) {
             distTo[i] = -1;
         }
-        distTo[s] = 0;
-
         // YOUR CODE HERE
-
+        bfs(adj, s, marked, distTo);
+        for (int i = 0; i < distTo.length; ++i) {
+            System.out.println("Path to node# " + i + " = " + distTo[i]);
+        }
         return distTo[t];
     }
 
     // Feel free to add a helper method, like the following, to make your code cleaner & modular.
-//    private static void bfs(ArrayList<Integer>[] adj, int s, boolean[] marked, int[] distTo) {
-//        Queue<Integer> queue = new LinkedList<Integer>();
-//        marked[s] = true;
-//        queue.add(s);
-//        // ...
-//        // MORE OF YOUR CODE
-//        // ...
-//    }
-
-
+    private static void bfs(ArrayList<Integer>[] adj, int s, boolean[] marked, int[] distTo) {
+        Queue<Integer> queue = new LinkedList<>();
+        marked[s] = true;
+        distTo[s] = 0;
+        queue.add(s);
+        while (!queue.isEmpty()) {
+            int v = queue.poll();
+            for (int w : adj[v]) {
+                if (!marked[w]) {
+                    distTo[w] = distTo[v] + 1;
+                    marked[w] = true;
+                    queue.add(w);
+                }
+            }            
+        }
+    }
+        
     public static void main(String[] args) {
-        In in = new In("G3-2.txt");
+        In in = new In("G3-1.txt");
         int n = in.readInt();
         int m = in.readInt();
         ArrayList<Integer>[] adj = (ArrayList<Integer>[])new ArrayList[n];
