@@ -1,7 +1,6 @@
 package lab12;
 
 import java.util.ArrayList;
-import java.util.Scanner;
 
 public class ConnectedComponents {
     private static int numberOfComponents(ArrayList<Integer>[] adj) {
@@ -11,7 +10,7 @@ public class ConnectedComponents {
         for (int i = 0; i < adj.length; ++i) {
             if (!marked[i]) {
                 findCC(adj, i, marked);
-                count++;
+                count++;    
             }
         }
         return count; // <- change this line to return the correct result
@@ -22,6 +21,7 @@ public class ConnectedComponents {
          marked[v] = true;
          for (int dest : adj[v]) {
             if (!marked[dest])
+                // recurse on this node and visit all neighbors
                 findCC(adj, dest, marked);
          }
      }

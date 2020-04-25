@@ -15,10 +15,10 @@ public class Reachability {
     // separate helper method (dfs) and call it from your code in reach().
     // Alternatively, you can keep all your logic in reach(), if you wish.
      private static void dfs(ArrayList<Integer>[] adj, int v, boolean[] marked) { 
-         marked[v] = true;
-         for (int dest : adj[v]) {
-            if (!marked[dest])
-                dfs(adj, dest, marked);
+         marked[v] = true;  
+         for (int neighbor : adj[v]) {
+            if (!marked[neighbor])
+                dfs(adj, neighbor, marked);
          }
      }
 
@@ -43,7 +43,7 @@ public class Reachability {
             adj[x - 1].add(y - 1);
             adj[y - 1].add(x - 1);
         }
-        System.out.println(Arrays.toString(adj) + "\n");
+        //System.out.println(Arrays.toString(adj) + "\n");
 
         // read the last line of the input file.
         // x = the start vertex; y = the end vertex
