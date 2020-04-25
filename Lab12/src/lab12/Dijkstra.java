@@ -18,7 +18,8 @@ public class Dijkstra {
         dist[s] = 0; // distance to source is 0
         
         // loop until we've visited all neighboring vertices
-        while (!queue.isEmpty()) {
+        while (marked.size() != adj.length) {
+                if (queue.isEmpty()) return -1; 
                 int v = queue.poll();
                 marked.add(v);
                 checkNeighbors(adj, cost, v);    
