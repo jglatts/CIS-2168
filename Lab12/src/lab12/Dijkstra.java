@@ -18,11 +18,13 @@ public class Dijkstra {
         dist[s] = 0; // distance to source is 0
         
         // loop until we've visited all neighboring vertices
-        while (marked.size() != adj.length) {
-                if (queue.isEmpty()) return -1; 
-                int v = queue.poll();
-                marked.add(v);
-                checkNeighbors(adj, cost, v);    
+        while (marked.size() != adj.length-1) {
+                if (!queue.isEmpty()){
+                    int v = queue.poll();
+                    marked.add(v);
+                    checkNeighbors(adj, cost, v);  
+                }   
+                else return -1;
         }
         return dist[t];
     }
@@ -41,7 +43,7 @@ public class Dijkstra {
     }
     
     public static void main(String[] args) {
-        In in = new In("G4-2.txt");
+        In in = new In("G4-3.txt");
         int n = in.readInt();
         int m = in.readInt();
         ArrayList<Integer>[] adj  = new ArrayList[n];
