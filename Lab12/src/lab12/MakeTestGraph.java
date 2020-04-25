@@ -30,7 +30,7 @@ public class MakeTestGraph {
             int x = rand.nextInt(e) + 1;
             p.println(r + " " + x);
         }
-        // generate source and terminal node for dijkstra
+        // generate source and terminal node
         int r = rand.nextInt(e) + 1;
         int x = rand.nextInt(e) + 1;
         p.println(r + " " + x);       
