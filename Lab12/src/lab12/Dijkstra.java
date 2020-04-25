@@ -12,7 +12,7 @@ public class Dijkstra {
         dist = new int[adj.length];
         queue.add(s);  // add source vertex to queue
         
-        // set all distanaces to -1  
+        // set all distanaces to infinity  
         for (int i = 0; i < cost.length; ++i) 
             dist[i] = Integer.MAX_VALUE; 
         dist[s] = 0; // distance to source is 0
